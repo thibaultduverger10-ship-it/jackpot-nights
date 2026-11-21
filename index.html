@@ -1,4 +1,214 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Jackpot Nights</title><meta http-equiv="refresh" content="0; url=v2/"><link rel="canonical" href="v2/"></head>
-<body><p><a href="v2/">Jackpot Nights</a></p></body></html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jackpot Nights</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* VOICE: a night out among friends, confident and honest, never pushy about money.
+   IDEA: the page behaves like an event ticket: one ticket, one stack, nothing more.
+   PICTURE: a ticket stub beside a single chip stack closed with a padlock.
+   COLOUR and TYPE: poker-table felt green, chip red accent, warm white; Anton for titles, Inter for text.
+   LAYOUT: full-width felt bands, hero with ticket picture, steps, benefits, house rules, FAQ, sign-up. */
+:root{color-scheme:dark;--felt:#0d4a33;--felt2:#0a3a28;--deep:#072a1d;--ink:#f4f1ea;--soft:#c9d8cf;--red:#d6283b;--gold:#e9c46a;--line:rgba(244,241,234,.16)}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth;scroll-padding-top:24px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important}}
+body{margin:0;background:var(--felt);color:var(--ink);font:17px/1.55 Inter,system-ui,sans-serif;overflow-x:clip}
+h1,h2{font-family:Anton,Impact,sans-serif;font-weight:400;line-height:1.05;text-wrap:balance;margin:0 0 .4em;letter-spacing:.01em}
+h1{font-size:clamp(40px,7vw,72px)}
+h2{font-size:clamp(30px,4.4vw,46px)}
+h3{font-size:18px;margin:0 0 .3em}
+p{margin:0 0 1em;max-width:62ch}
+a{color:var(--gold)}
+.band{padding:clamp(40px,6vw,88px) max(5vw,18px)}
+.wrap{max-width:1180px;margin:0 auto}
+.alt{background:var(--felt2)}
+.deep{background:var(--deep)}
+.lead{font-size:clamp(17px,2vw,20px);color:var(--soft)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 26px;border-radius:999px;background:var(--red);color:#fff;font-weight:700;font-size:17px;text-decoration:none;border:0;cursor:pointer;box-shadow:0 6px 0 #8f1424}
+.btn:hover{filter:brightness(1.08)}
+.btn:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.small{font-size:14px;color:var(--soft)}
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center}
+.brand{font-family:Anton,Impact,sans-serif;font-size:22px;color:var(--gold);margin-bottom:28px;display:block}
+.facts{display:flex;flex-wrap:wrap;gap:10px;margin:6px 0 26px;padding:0;list-style:none}
+.facts li{border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-weight:500;white-space:nowrap}
+.art{width:100%;height:auto;display:block}
+/* problem */
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:start}
+.limits{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.limits li{background:rgba(0,0,0,.18);border-radius:14px;padding:16px 18px}
+.limits b{display:block;color:var(--gold)}
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:28px;counter-reset:s;padding:0;list-style:none}
+.steps li{background:rgba(0,0,0,.2);border-radius:18px;padding:22px}
+.steps svg{width:54px;height:54px;display:block;margin-bottom:14px}
+/* benefits */
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:26px}
+.card{border:1px solid var(--line);border-radius:18px;padding:22px}
+.card p{margin:0;color:var(--soft)}
+/* rules */
+.rules{list-style:none;padding:0;margin:22px 0 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 28px}
+.rules li{padding-left:34px;position:relative}
+.rules li::before{content:"";position:absolute;left:0;top:4px;width:20px;height:20px;border-radius:50%;background:var(--gold);box-shadow:inset 0 0 0 4px var(--deep),0 0 0 2px var(--gold)}
+.help{margin-top:26px;padding:18px 20px;border-radius:14px;background:rgba(233,196,106,.12)}
+/* faq */
+details{border-bottom:1px solid var(--line);padding:16px 0}
+summary{cursor:pointer;font-weight:700;font-size:18px;list-style:none;display:flex;justify-content:space-between;gap:16px;min-height:28px}
+summary::after{content:"+";color:var(--gold);font-size:24px;line-height:1}
+details[open] summary::after{content:"–"}
+details p{margin:10px 0 0;color:var(--soft)}
+/* join */
+.join{text-align:center}
+.join p{margin-left:auto;margin-right:auto}
+.asks{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:18px 0 28px;padding:0;list-style:none}
+.asks li{background:rgba(0,0,0,.22);border-radius:10px;padding:8px 14px;font-size:15px}
+footer{padding:28px max(5vw,18px);background:#051e15;font-size:14px;color:var(--soft);text-align:center}
+@media(max-width:820px){.hero,.split{grid-template-columns:minmax(0,1fr)}.steps{grid-template-columns:minmax(0,1fr)}.art{max-width:460px;margin:0 auto}}
+@media(max-width:600px){.grid2,.rules{grid-template-columns:minmax(0,1fr)}.btn{width:100%}}
+</style>
+</head>
+<body>
+
+<header class="band">
+  <div class="wrap hero">
+    <div>
+      <span class="brand">JACKPOT NIGHTS</span>
+      <h1>All the thrill. None of the chase.</h1>
+      <p class="lead">Poker and casino nights for Montréal students, in partner bars.</p>
+      <ul class="facts">
+        <li>One $25 ticket</li><li>One stack of chips</li><li>No re-buy</li>
+      </ul>
+      <a class="btn cta" href="#join">Join the list for our first night</a>
+      <p class="small" style="margin-top:12px">Free, no payment.</p>
+    </div>
+    <svg class="art" viewBox="0 0 520 400" role="img" aria-label="A $25 ticket next to one stack of chips closed with a padlock">
+      <defs>
+        <linearGradient id="tk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbf7ee"/><stop offset="1" stop-color="#e9e1cf"/></linearGradient>
+        <linearGradient id="chip" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#b81d2f"/><stop offset=".5" stop-color="#e2394b"/><stop offset="1" stop-color="#a51628"/></linearGradient>
+        <g id="c"><ellipse cx="0" cy="10" rx="70" ry="22" fill="#7c0f1d"/><rect x="-70" y="-6" width="140" height="16" fill="url(#chip)"/><ellipse cx="0" cy="-6" rx="70" ry="22" fill="#e2394b"/><ellipse cx="0" cy="-6" rx="44" ry="13" fill="none" stroke="#fbf7ee" stroke-width="4" stroke-dasharray="10 8"/></g>
+      </defs>
+      <ellipse cx="270" cy="352" rx="230" ry="26" fill="#05251a" opacity=".55"/>
+      <g transform="rotate(-8 190 200)">
+        <rect x="30" y="110" width="300" height="170" rx="16" fill="url(#tk)"/>
+        <line x1="240" y1="122" x2="240" y2="268" stroke="#0d4a33" stroke-width="3" stroke-dasharray="6 7"/>
+        <circle cx="240" cy="110" r="13" fill="#0d4a33"/><circle cx="240" cy="280" r="13" fill="#0d4a33"/>
+        <text x="54" y="152" font-family="Inter,sans-serif" font-weight="700" font-size="14" fill="#0d4a33">ADMIT ONE</text>
+        <text x="52" y="222" font-family="Anton,Impact,sans-serif" font-size="68" fill="#b81d2f">$25</text>
+        <text x="54" y="256" font-family="Inter,sans-serif" font-size="14" fill="#3b3b3b">1 stack · no re-buy</text>
+        <text x="286" y="200" font-family="Anton,Impact,sans-serif" font-size="26" fill="#0d4a33" transform="rotate(-90 286 200)" text-anchor="middle">JACKPOT</text>
+      </g>
+      <g transform="translate(390 316)"><use href="#c"/></g>
+      <g transform="translate(390 284)"><use href="#c"/></g>
+      <g transform="translate(390 252)"><use href="#c"/></g>
+      <g transform="translate(390 220)"><use href="#c"/></g>
+      <g transform="translate(390 188)"><use href="#c"/></g>
+      <g transform="translate(390 120)">
+        <path d="M-22 0 v-22 a22 22 0 0 1 44 0 v22" fill="none" stroke="#e9c46a" stroke-width="9"/>
+        <rect x="-36" y="-2" width="72" height="56" rx="10" fill="#e9c46a"/>
+        <circle cx="0" cy="22" r="7" fill="#0a3a28"/><rect x="-3" y="24" width="6" height="16" rx="2" fill="#0a3a28"/>
+      </g>
+    </svg>
+  </div>
+</header>
+
+<section class="band alt">
+  <div class="wrap split">
+    <div>
+      <h2>A night at the casino shouldn't end at the ATM.</h2>
+      <p class="lead">We interviewed students who play poker and casino games. The hardest moment is the re-buy: when you pay again to win it back.</p>
+    </div>
+    <ul class="limits">
+      <li><b>So they build their own limits</b>Leaving their bank card at home before going out.</li>
+      <li><b>Or rely on their friends</b>Only playing with people who can stop them.</li>
+      <li><b>And help comes too late</b>Support services exist, but most students only hear of them after the damage.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <h2>How it works</h2>
+    <ol class="steps">
+      <li>
+        <svg viewBox="0 0 54 54" aria-hidden="true"><rect x="5" y="13" width="44" height="28" rx="5" fill="#e9c46a"/><line x1="36" y1="15" x2="36" y2="39" stroke="#0d4a33" stroke-width="2" stroke-dasharray="3 3"/></svg>
+        <h3>1. Book your $25 ticket</h3>
+        <p class="small">Alone or with friends. You know your maximum spend before you leave home.</p>
+      </li>
+      <li>
+        <svg viewBox="0 0 54 54" aria-hidden="true"><ellipse cx="27" cy="38" rx="20" ry="7" fill="#8f1424"/><ellipse cx="27" cy="31" rx="20" ry="7" fill="#d6283b"/><ellipse cx="27" cy="24" rx="20" ry="7" fill="#d6283b" stroke="#8f1424"/><ellipse cx="27" cy="17" rx="20" ry="7" fill="#e2394b" stroke="#8f1424"/></svg>
+        <h3>2. Get one stack of chips</h3>
+        <p class="small">Play poker and blackjack with real dealers in a partner bar. When your chips are gone, they're gone.</p>
+      </li>
+      <li>
+        <svg viewBox="0 0 54 54" aria-hidden="true"><rect x="6" y="28" width="11" height="18" rx="2" fill="#c9d8cf"/><rect x="21" y="14" width="11" height="32" rx="2" fill="#e9c46a"/><rect x="36" y="22" width="11" height="24" rx="2" fill="#c9d8cf"/></svg>
+        <h3>3. Climb the live leaderboard</h3>
+        <p class="small">The top players of the night win prizes from our sponsors.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="band alt">
+  <div class="wrap">
+    <h2>What changes for you</h2>
+    <div class="grid2">
+      <div class="card"><h3>You know your max spend</h3><p>Your ticket is all you can spend at the tables. Decide once, before you arrive.</p></div>
+      <div class="card"><h3>No re-buy, no ATM</h3><p>You can't buy more chips, so there are no losses to chase.</p></div>
+      <div class="card"><h3>Prizes come from sponsors</h3><p>Never from other players' losses. When you win, nobody at your table paid for it.</p></div>
+      <div class="card"><h3>A real night out</h3><p>Dealers, a leaderboard and your friends around the table.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band deep">
+  <div class="wrap">
+    <h2>Our house rules</h2>
+    <p class="lead">Built to keep the fun and leave out the risk.</p>
+    <ul class="rules">
+      <li>18+ only, ID checked at the door.</li>
+      <li>Prizes are gift cards and tickets, never cash.</li>
+      <li>Maximum 2 nights per month per player.</li>
+      <li>Self-excluded players cannot book.</li>
+    </ul>
+    <p class="help">Need help with gambling? <a href="https://aidejeu.ca/">Jeu : aide et référence</a>, free and confidential, 24/7: <span style="white-space:nowrap">1 800 461-0140</span>.</p>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <h2>Questions</h2>
+    <details><summary>Can I buy more chips?</summary><p>No. That's the point: one ticket, one stack.</p></details>
+    <details><summary>Is this legal?</summary><p>We are confirming the legal framework with a lawyer. No night will take place before it is confirmed.</p></details>
+    <details><summary>Where?</summary><p>Partner bars in Montréal, to be announced.</p></details>
+  </div>
+</section>
+
+<section class="band alt join" id="join">
+  <div class="wrap">
+    <h2>Be at the first night</h2>
+    <p class="lead">Join the list and we'll tell you when and where the first Jackpot Night happens.</p>
+    <ul class="asks"><li>Your email</li><li>Your school</li><li>How often you play</li><li>Would you pay $25?</li></ul>
+    <a class="btn cta" href="#join">Join the list for our first night</a>
+    <p class="small" style="margin-top:16px">We will only use your email to tell you about the first night. You can ask us to delete it anytime.</p>
+  </div>
+</section>
+
+<footer>Jackpot Nights is a student project in development (HEC Montréal). No tickets are sold yet.</footer>
+
+<script>
+{
+  // Paste the link of your Google Form between the quotes. Every sign-up button will use it.
+  const FORM_URL = "https://forms.gle/aGSst53EYBDsrhYy8";
+  if (FORM_URL) {
+    for (const a of document.querySelectorAll("a.cta")) { a.href = FORM_URL; a.target = "_blank"; a.rel = "noopener"; }
+  }
+}
+</script>
+</body>
+</html>
